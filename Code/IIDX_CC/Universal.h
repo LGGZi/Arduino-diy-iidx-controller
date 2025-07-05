@@ -4,7 +4,7 @@
 //键鼠模式灵敏度vv 值为起转脉冲数
 #define TT_ACTIVE_COUNT 1
 //手柄模式灵敏度vv 值为编码器脉冲数与转动一圈后上报的位置的位移数值的比值
-#define ENCODER_SENSITIVITY (double) 2.34375
+#define ENCODER_PULSE_TIMES 600
 //The bigger the more sensitive
 
 // encoder sensitivity = number of positions per rotation (600) / number of positions for HID report (256)
@@ -30,6 +30,7 @@ volatile uint16_t ledbuf = 0;
 volatile uint16_t buttonbuf = 1;
 volatile int lighton = 1;
 volatile int32_t encL = 0;
+volatile double encoder_sensitivity = ENCODER_PULSE_TIMES / 256;
 /*——————————通用函数——————————*/
 void lights_test(uint16_t number = 7){
   number = number > BUTTONCOUNT ? BUTTONCOUNT : number;

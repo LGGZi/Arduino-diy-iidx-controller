@@ -9,7 +9,7 @@ extern volatile uint16_t ledbuf;
 extern volatile uint16_t buttonbuf;
 extern volatile int lighton;
 extern volatile int32_t encL;
-
+extern volatile double encoder_sensitivity;
 int numSTARTENCL = 4;
 int startencl = 0;
 
@@ -41,7 +41,7 @@ void EncL_AbsoluteOn(){
   startencl++;
   if(startencl>numSTARTENCL){
     if (digitalRead(ENC_L_B) != HIGH) {
-      encL = 599;
+      encL = ENCODER_PULSE_TIMES - 1;
       
       report.xboxButtons &= ~((uint16_t)1 << BUTTONCOUNT);
       report.xboxButtons |= (uint16_t)1 << (BUTTONCOUNT + 1);
@@ -59,7 +59,7 @@ void EncL_AbsoluteOff(){
   if(stopFlag < stopThreshold){
       stopFlag++;
     } else {
-      encL = 300;
+      encL = ENCODER_PULSE_TIMES / 2;
       startencl=0;
       report.xboxButtons &= ~((uint16_t)1 << BUTTONCOUNT);
       report.xboxButtons &= ~((uint16_t)1 << (BUTTONCOUNT + 1));
@@ -122,7 +122,7 @@ void using_Controller_style(){
   }
   //Serial.println(ledbuf);
   // 将从编码器读得的转盘数据处理后传递给report数据结构的对应部分
-  Axis_buf = (uint8_t)((int16_t)(encL / ENCODER_SENSITIVITY) % 256) - 128;
+  Axis_buf = (uint8_t)((int16_t)(encL / encoder_sensitivity) % 256) - 128;
   report.lxAxis = Axis_buf;
 
   // 可开关的灯光部分

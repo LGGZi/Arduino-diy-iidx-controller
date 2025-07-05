@@ -56,7 +56,7 @@ void setup() {
   {
     EEPROM.write(0, 6);
   }
-  //EEPROM.write(0, 1);
+  //EEPROM.write(0, 3);
   EEPROM.get(0 , mode);
   mode_select(mode);
   // Serial.begin(9600);
