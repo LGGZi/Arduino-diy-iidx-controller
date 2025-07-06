@@ -1,6 +1,6 @@
 # Arduino DIY IIDX Controller
 *(Deepseek used)*  
-An IIDX controller inspired by lizardbeans' work, using a design similar to the Overclock A case. Compatible with LR2, beatoraja, and official Konami games. Features include HID lighting support. Total build cost is approximately ¥300-400 (excluding some tools), varying based on component choices. Delivers excellent performance at an affordable price.
+An IIDX controller inspired by lizardbeans' work, using a design similar to the ChaoPin A case. Compatible with LR2, beatoraja, and official Konami games. Features include HID lighting support. Total build cost is approximately ¥300-400 (excluding some tools), varying based on component choices. Delivers excellent performance at an affordable price.
 
 ## Photos
 ![](https://github.com/LGGZi/Arduino-diy-iidx-controller/blob/main/IMAGE/Controller.png)
@@ -19,7 +19,7 @@ Hold **START** (BTA on PCB) + **one button (1-6)** while plugging in USB to sele
 | 2    | Digital Gamepad   | Gamepad Buttons          | Instant full-left/full-right stick/button press          | **Highest Turntable Sensitivity** |
 | 3    | Digital Gamepad   | Gamepad Buttons          | Instant full-left/full-right stick/button press          | Medium Sensitivity             |
 | 4    | Digital Gamepad   | Gamepad Buttons          | Instant full-left/full-right stick/button press          | **Lowest Turntable Sensitivity**  |
-| 5    | Keyboard + Mouse  | Keys: `Z S X D C F V`    | Mouse X-axis movement                                    | **Recommended for Official Games** |
+| 5    | Keyboard + Mouse  | Keys: `Z S X D C F V`    | Mouse X-axis movement                                    | **Recommended for iidx** |
 | 6    | Keyboard + Mouse  | Keys: `Z S X D C F V`    | Mouse Scroll Wheel                                       | *Experimental (Not Recommended)* |
 
 ## PCB Guide
@@ -39,7 +39,7 @@ Hold **START** (BTA on PCB) + **one button (1-6)** while plugging in USB to sele
 
 ## Enclosure Design
 *   **Material:** Laser-cut acrylic
-*   **Frame:** 10mm thickness
+*   **Frame:** 10mm thickness (9.8mm recommended)
 *   **Panels:** Thickness specified in CAD files
 *   **Assembly:** Connect top/bottom panels using **50mm M4 standoffs** inserted into screw holes
 *   **Turntable Options:**
