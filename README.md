@@ -4,7 +4,7 @@
 ## 实物图
 <br>![](https://github.com/LGGZi/Arduino-diy-iidx-controller/blob/main/IMAGE/Controller.png)<br>
 ## 目前已实现
-1、一个画的很随便但可用的电路板，嘉立创制作、原理图和PCB以及Gerber文件都放在PCB&BOM文件夹下了。<br>
+1、一个画的很随便但可用的电路板，嘉立创制作、原理图和PCB以及Gerber文件都放在`PCB&BOM`文件夹下了。<br>
 2、外壳的CAD文件。全亚克力外壳，包括转盘，转盘额外提供了一个可连接联轴器的版本，不需要的话不用切割。<br>
 3、实现了多种输入模式的代码，具体功能在下一部分详细描述。<br>
 ## 控制器功能
