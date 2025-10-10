@@ -1,6 +1,9 @@
 # Arduino-diy-iidx-controller
-(README_en.md for English)
-学着lizardbeans佬写代码，使用超频A类似的外壳设计做的IIDX手台，LR2、beatoraja、和本家都可用，功能上包含HID灯光。自己做出来的成本在300-400（去除部分工具费用的话），视选用的配件具体数值会有波动，游玩的效果很不错，算得上便宜好用。
+(README_EN.md for English)
+学着lizardbeans佬写代码，使用超频A类似的外壳设计做的IIDX手台，LR2、beatoraja、和本家都可用，功能上包含HID灯光。自己做出来的成本在300-400（去除部分工具费用的话），视选用的配件具体数值会有波动，游玩的效果很不错，算得上便宜好用。<br>
+2025/10/10更新：<br>
+加入SDVX版代码和CAD文件，其中CAD文件的外壳在亚克力材质下可能有一定的强度问题。<br>
+加入SDVX和IIDX通用的12键2编码器版本PCB和代码。
 ## 实物图
 <br>![](https://github.com/LGGZi/Arduino-diy-iidx-controller/blob/main/IMAGE/Controller.png)<br>
 ## 目前已实现
