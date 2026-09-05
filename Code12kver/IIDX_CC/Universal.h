@@ -17,17 +17,17 @@
 // Number of microseconds between HID reports
 // 2000 = 500hz
 //编码器AB相对应引脚
-#define ENC_L_A 2
-#define ENC_L_B 3
-#define ENC_R_A 1
-#define ENC_R_B 0
+#define ENC_L_A 3
+#define ENC_L_B 2
+#define ENC_R_A 0
+#define ENC_R_B 1
 //实现的按键数（作为数组脚标最大值的声名，需严格按照数组大小设置）
 // #define BUTTONCOUNT 12
 /*——————————全局变量声名——————————*/
 volatile HIDConReport_t report;
-volatile uint8_t ledPins[] = {A0,A1,A2,A3,A4,A5,8,9,10,11,12,13};
+volatile uint8_t ledPins[] = {A0,A1,A2,A3,A4,A5,10,9,8,11,12,13};
 volatile uint8_t row_bt[] = {SCK,MOSI,MISO};
-volatile uint8_t col_bt[] = {4,5,6,7};
+volatile uint8_t col_bt[] = {5,6,4,7};
 volatile uint16_t ledbuf = 0;
 volatile uint16_t buttonstate = 1;
 volatile int lighton = 1;
@@ -61,17 +61,17 @@ void lights(uint16_t lightDesc){
 }
 uint16_t button_scan(){
   uint16_t cur_scan_result = 0;
-  for(int i=0;i< sizeof(col_bt);i++){
-    digitalWrite(col_bt[i],LOW);
+  for(int i=0;i < sizeof(row_bt);i++){
+    digitalWrite(row_bt[i],LOW);
     switch(i){
-      case 0: digitalWrite(col_bt[sizeof(col_bt)-1],HIGH); break;
-      default: digitalWrite(col_bt[i-1],HIGH);  
+      case 0: digitalWrite(row_bt[sizeof(row_bt) - 1],HIGH); break;
+      default: digitalWrite(row_bt[i-1],HIGH);  
     }
-    for(int j=0;j< sizeof(row_bt);j++){
-      if(digitalRead(row_bt[j])!=HIGH){
-        cur_scan_result |= (uint16_t)1 << (j*4+i);
+    for(int j=0;j< sizeof(col_bt);j++){
+      if(digitalRead(col_bt[j])!=HIGH){
+        cur_scan_result |= (uint16_t)1 << (i*4+j);
       }else{
-        cur_scan_result &= ~((uint16_t)1 << (j*4+i));
+        cur_scan_result &= ~((uint16_t)1 << (i*4+j));
       }
     }
   }

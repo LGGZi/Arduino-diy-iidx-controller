@@ -13,61 +13,58 @@ extern volatile int lighton;
 
 uint8_t mode = 0;
 //模式选择
-void mode_select(uint8_t modecode){
-  if(modecode >= 1 && modecode <= 4){
+void mode_select(uint8_t modecode) {
+  if (modecode >= 1 && modecode <= 3) {
     use_Controller_style(modecode);
-  }else{
+  } else {
     use_KeyboardMouse_style(modecode);
   }
 }
 //初始化
 void setup() {
-  Serial.begin(9600);
+  // Serial.begin(9600);
   delay(1000);
-  for(int i=0;i < sizeof(row_bt);i++){
-    pinMode(row_bt[i],INPUT_PULLUP);
+  for (int i = 0; i < sizeof(col_bt); i++) {
+    pinMode(col_bt[i], INPUT_PULLUP);
   }
-  for(int i=0;i < sizeof(col_bt);i++){
-    pinMode(col_bt[i],OUTPUT);
+  for (int i = 0; i < sizeof(row_bt); i++) {
+    pinMode(row_bt[i], OUTPUT);
   }
-  for(int i=0;i < sizeof(ledPins);i++){
-    pinMode(ledPins[i],OUTPUT);
+  for (int i = 0; i < sizeof(ledPins); i++) {
+    pinMode(ledPins[i], OUTPUT);
   }
-  pinMode(ENC_L_A,INPUT_PULLUP);
-  pinMode(ENC_L_B,INPUT_PULLUP);
-  pinMode(ENC_R_A,INPUT_PULLUP);
-  pinMode(ENC_R_B,INPUT_PULLUP);
+  pinMode(ENC_L_A, INPUT_PULLUP);
+  pinMode(ENC_L_B, INPUT_PULLUP);
+  pinMode(ENC_R_A, INPUT_PULLUP);
+  pinMode(ENC_R_B, INPUT_PULLUP);
   //初始选择模式的部分
   buttonstate = button_scan();
   delay(100);
   buttonstate &= button_scan();
   Serial.println(buttonstate);
-  if(((buttonstate >> 0) & 1))
-  { 
+  if (((buttonstate >> 0) & 1)) {
+    EEPROM.write(0, 1);
+  } else if (((buttonstate >> 1) & 1)) {
+    EEPROM.write(0, 2);
+  } else if (((buttonstate >> 2) & 1)) {
+    EEPROM.write(0, 3);
+  } else if (((buttonstate >> 3) & 1)) {
+    EEPROM.write(0, 4);
+  } else if (((buttonstate >> 4) & 1)) {
+    EEPROM.write(0, 5);
+  } else if ((EEPROM.read(0) < 0) | (EEPROM.read(0) > 6)) {
     EEPROM.write(0, 1);
   }
-  else if(((buttonstate >> 1) & 1))
-  {
-    EEPROM.write(0, 2);
-  }
-  else if(((buttonstate >> 2) & 1))
-  {
-    EEPROM.write(0, 3);
-  }
-  else if(((buttonstate >> 3) & 1))
-  {
-    EEPROM.write(0, 5);
-  }
   //EEPROM.write(0, 1);
-  EEPROM.get(0 , mode);
+  EEPROM.get(0, mode);
   mode_select(mode);
 }
 
 void loop() {
   //主程序选择
-  if(mode >= 1 && mode <= 4){
+  if (mode >= 1 && mode <= 3) {
     using_Controller_style();
-  }else{
+  } else {
     using_KeyboardMouse_style();
   }
   lights(ledbuf);

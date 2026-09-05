@@ -29,7 +29,7 @@ void EncL(){
   //Serial.print("+p");
   //startencl++;
   //if(startencl>numSTARTENCL){
-  if (digitalRead(ENC_L_B) != HIGH) {
+  if (digitalRead(ENC_L_A) != HIGH) {
     //Serial.print("++");
     encL ++ ;
   } else {
@@ -43,7 +43,7 @@ void EncR(){
   //Serial.print("+p");
   //startencl++;
   //if(startencl>numSTARTENCL){
-  if (digitalRead(ENC_R_B) != HIGH) {
+  if (digitalRead(ENC_R_A) != HIGH) {
     //Serial.print("++");
     encR ++ ;
   } else {
@@ -59,7 +59,7 @@ void EncL_AbsoluteOn(){
   stopFlagL = 0;
   startencl++;
   if(startencl>numSTARTENCL){
-    if (digitalRead(ENC_L_B) != HIGH) {
+    if (digitalRead(ENC_L_A) != HIGH) {
       xAxis_buf = 125;
       
       buttonstate &= ~((uint16_t)1 << max_bt);
@@ -77,7 +77,7 @@ void EncR_AbsoluteOn(){
   stopFlagR = 0;
   startencR++;
   if(startencR>numSTARTENCL){
-    if (digitalRead(ENC_R_B) != HIGH) {
+    if (digitalRead(ENC_R_A) != HIGH) {
       yAxis_buf = 125;
       
       buttonstate &= ~((uint16_t)1 << max_bt + 2);
@@ -117,30 +117,30 @@ void use_Controller_style(uint8_t modecode){
   switch(modecode){
     case 1:
       lights_test(modecode);
-      attachInterrupt(digitalPinToInterrupt(ENC_L_A), EncL, RISING);
-      attachInterrupt(digitalPinToInterrupt(ENC_R_A), EncR, RISING);
+      attachInterrupt(digitalPinToInterrupt(ENC_L_B), EncL, RISING);
+      attachInterrupt(digitalPinToInterrupt(ENC_R_B), EncR, RISING);
       numSTARTENCL=0;
     break;
     case 2:
       lights_test(modecode);
       stopThreshold = 3; 
       numSTARTENCL=1;
-      attachInterrupt(digitalPinToInterrupt(ENC_L_A), EncL_AbsoluteOn, RISING);
-      attachInterrupt(digitalPinToInterrupt(ENC_R_A), EncR_AbsoluteOn, RISING);
+      attachInterrupt(digitalPinToInterrupt(ENC_L_B), EncL_AbsoluteOn, RISING);
+      attachInterrupt(digitalPinToInterrupt(ENC_R_B), EncR_AbsoluteOn, RISING);
     break;
     case 3:
       lights_test(modecode);
       stopThreshold = 5; 
       numSTARTENCL=2;
-      attachInterrupt(digitalPinToInterrupt(ENC_L_A), EncL_AbsoluteOn, RISING);
-      attachInterrupt(digitalPinToInterrupt(ENC_R_A), EncR_AbsoluteOn, RISING);
+      attachInterrupt(digitalPinToInterrupt(ENC_L_B), EncL_AbsoluteOn, RISING);
+      attachInterrupt(digitalPinToInterrupt(ENC_R_B), EncR_AbsoluteOn, RISING);
     break;
     case 4:
       lights_test(modecode);
       stopThreshold = 6; 
       numSTARTENCL=5;
-      attachInterrupt(digitalPinToInterrupt(ENC_L_A), EncL_AbsoluteOn, RISING);
-      attachInterrupt(digitalPinToInterrupt(ENC_R_A), EncR_AbsoluteOn, RISING);
+      attachInterrupt(digitalPinToInterrupt(ENC_L_B), EncL_AbsoluteOn, RISING);
+      attachInterrupt(digitalPinToInterrupt(ENC_R_B), EncR_AbsoluteOn, RISING);
     break;
     default: break;
   }

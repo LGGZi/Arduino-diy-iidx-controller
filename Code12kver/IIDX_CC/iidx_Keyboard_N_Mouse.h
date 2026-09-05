@@ -16,10 +16,15 @@ int32_t diff_encL = 0;
 int32_t pre_encR = 0;
 int32_t diff_encR = 0;
 uint16_t buttonstate_now;
-
-int keys[]{41,34,39,19,18,21,37,42,43,44,0,1};
+ uint8_t kstopFlagL = 0;
+ uint8_t kstopFlagR = 0;
+ uint8_t kstopThreshold = 0;
+ int knumSTARTENCL = 4;
+ int kstartencl = 0;
+ int kstartencR = 0;
+int keys[]{41,34,39,19,18,21,37,42,43,44,45,46};
 int key_map[sizeof(col_bt)*sizeof(row_bt)+2][2] = {0};
-int keys1[]{16,34,19,56,25,24,30,22,23,44,0,1};
+int keys1[]{16,34,19,56,25,24,30,22,23,44,45,46};
 
 // uint8_t TT_addr = 0;
 unsigned long time_Now = 0;
@@ -30,7 +35,7 @@ void Encl_mouse(){
   //Serial.print("+p");
   //startencl++;
   //if(startencl>numSTARTENCL){
-  if (digitalRead(ENC_L_B) != HIGH) {
+  if (digitalRead(ENC_L_A) != HIGH) {
     //Serial.print("++");
     // TT_addr = 1;
     encL ++ ;
@@ -46,7 +51,7 @@ void EncR_mouse(){
   //Serial.print("+p");
   //startencl++;
   //if(startencl>numSTARTENCL){
-  if (digitalRead(ENC_R_B) != HIGH) {
+  if (digitalRead(ENC_R_A) != HIGH) {
     //Serial.print("++");
     // TT_addr = 1;
     encR ++ ;
@@ -79,20 +84,71 @@ void keycode_find1(){
     // Serial.println(key_map[i][1]);
   }
 }
+void kEncL_AbsoluteOn(){
+  //绝对值模式的正反转检测与按键映射
+  kstopFlagL = 0;
+  kstartencl++;
+  if(kstartencl>knumSTARTENCL){
+    if (digitalRead(ENC_L_A) != HIGH) {
+      report.keyboardKeys[-2] |= ((uint8_t)1 << 0);
+      report.keyboardKeys[-2] &= ~((uint8_t)1 << 1);
+    } else {
+      report.keyboardKeys[-2] |= ((uint8_t)1 << 1);
+      report.keyboardKeys[-2] &= ~((uint8_t)1 << 0);
+    }
+  }
+}
+void kEncR_AbsoluteOn(){
+  //绝对值模式的正反转检测与按键映射
+  kstopFlagR = 0;
+  kstartencR++;
+  if(kstartencR>knumSTARTENCL){
+    if (digitalRead(ENC_R_A) != HIGH) {
+      report.keyboardKeys[-2] |= ((uint8_t)1 << 4);
+      report.keyboardKeys[-2] &= ~((uint8_t)1 << 5);
+    } else {
+      report.keyboardKeys[-2] |= ((uint8_t)1 << 5);
+      report.keyboardKeys[-2] &= ~((uint8_t)1 << 4);
+    }
+  }
+}
+void kEncL_AbsoluteOff(){
+  //绝对值模式的归中函数
+  if(kstopFlagL < kstopThreshold){
+      kstopFlagL++;
+    } else {
+      report.keyboardKeys[-2] &= ~((uint8_t)1 << 0);
+      report.keyboardKeys[-2] &= ~((uint8_t)1 << 1);
+      kstartencl=0;
+    }
+}
+void kEncR_AbsoluteOff(){
+  //绝对值模式的归中函数
+  if(kstopFlagR < kstopThreshold){
+      kstopFlagR++;
+    } else {
+      report.keyboardKeys[-2] &= ~((uint8_t)1 << 4);
+      report.keyboardKeys[-2] &= ~((uint8_t)1 << 5);
+      kstartencR=0;
+    }
+}
 
 void use_KeyboardMouse_style(uint8_t modecode){
-  if(modecode == 5){
+  if(modecode == 4){
     lights_test(modecode);
-    attachInterrupt(digitalPinToInterrupt(ENC_L_A), Encl_mouse, RISING);
-    attachInterrupt(digitalPinToInterrupt(ENC_R_A), EncR_mouse, RISING);
-    numSTARTENCL=0;
+    attachInterrupt(digitalPinToInterrupt(ENC_L_B), Encl_mouse, RISING);
+    attachInterrupt(digitalPinToInterrupt(ENC_R_B), EncR_mouse, RISING);
+    knumSTARTENCL=0;
     keycode_find();
     report.lyAxis = -128;
-  }else  if(modecode == 6){
+  }else  if(modecode == 5){
     lights_test(modecode);
-    attachInterrupt(digitalPinToInterrupt(ENC_L_A), Encl_mouse, RISING);
-    numSTARTENCL=0;
-    keycode_find1();
+    kstopThreshold = 3; 
+    knumSTARTENCL=1;
+    attachInterrupt(digitalPinToInterrupt(ENC_L_B), kEncL_AbsoluteOn, RISING);
+    attachInterrupt(digitalPinToInterrupt(ENC_R_B), kEncR_AbsoluteOn, RISING);
+    keycode_find();
+    report.lyAxis = -128;
   }
   modekeyboard = modecode;
 }
@@ -129,7 +185,10 @@ void using_KeyboardMouse_style(){
   }else{
     report.mouseY = 0;
   }
-
+  if(kstopThreshold != 0){
+    kEncL_AbsoluteOff();
+    kEncR_AbsoluteOff();
+  }
   //可开关的灯光部分
   lightswitch(11,0,3,buttonstate);
   //如果灯光处于开启状态，则将HID灯光与按键状态做或，并将结果传递给对应函数来使led发光
