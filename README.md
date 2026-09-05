@@ -24,7 +24,7 @@
 通过使用EEPROM实现了模式的记忆，插入时不选择模式（不按下按键）会从EEPROM中读取上次的模式并进入
 
 ## 电路板使用说明
-实物图<br>![](https://github.com/LGGZi/Arduino-diy-iidx-controller/blob/main/IMAGE/PCB.png)<br>
+实物图<br>![](https://github.com/LGGZi/Arduino-diy-iidx-controller/blob/main/IMAGE/Full.jpg)<br>
 所有配件通过XH2.54的4pin借口连接，连接方式如下图<br>![](https://github.com/LGGZi/Arduino-diy-iidx-controller/blob/main/IMAGE/BT%20connection.png)<br>
 以按钮线举例如下图所示，公头防呆凸起面向上，左侧两个为连接微动的线，右侧两个为连接灯光的线，编码器的连接方式类似，根据上图连接即可<br>![](https://github.com/LGGZi/Arduino-diy-iidx-controller/blob/main/IMAGE/WIREING.png)<br>
 USB部分以4Pin接口的形式引出，可外接USB模块<br>![](https://github.com/LGGZi/Arduino-diy-iidx-controller/blob/main/IMAGE/USB%20part.jpg)<br>
