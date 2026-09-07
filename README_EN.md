@@ -1,7 +1,7 @@
 # Arduino-diy-iidx-controller
 (README_EN.md for English)
 
-Learn from lizardbeans' code, using a design similar to the "Overclock A" shell to build an IIDX controller. Works with LR2, beatoraja, and the official IIDX game, with HID lighting support. The total cost for a DIY build is around 300–400 RMB (excluding some tool expenses), varying depending on the specific components chosen. The performance is quite good—a cost-effective solution.
+Learn from lizardbeans' code, using a design similar to the "ChaoPin A" shell to build an IIDX controller. Works with LR2, beatoraja, and the official IIDX game, with HID lighting support. The total cost for a DIY build is around 300–400 RMB (excluding some tool expenses), varying depending on the specific components chosen. The performance is quite good—a cost-effective solution.
 
 2025/10/10 Update:  
 Added SDVX version code and CAD files. Note that the acrylic shell in the CAD files may have some strength issues.  
