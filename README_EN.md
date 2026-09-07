@@ -1,5 +1,5 @@
 # Arduino-diy-iidx-controller
-(README_EN.md for English)
+!!AI translation used!!
 
 Learn from lizardbeans' code, using a design similar to the "ChaoPin A" shell to build an IIDX controller. Works with LR2, beatoraja, and the official IIDX game, with HID lighting support. The total cost for a DIY build is around 300–400 RMB (excluding some tool expenses), varying depending on the specific components chosen. The performance is quite good—a cost-effective solution.
 
@@ -34,6 +34,7 @@ Lighting can be toggled using a combo key press. The light switching function is
 ## PCB Usage Instructions
 Photo<br>![](https://github.com/LGGZi/Arduino-diy-iidx-controller/blob/main/IMAGE/Full.jpg)<br>
 All components are connected via XH2.54 4‑pin connectors. Wiring diagram below:<br>![](https://github.com/LGGZi/Arduino-diy-iidx-controller/blob/main/IMAGE/BT%20connection.png)<br>
+Simple Chinese lesson🤓："按钮" = "Button(s)", "灯" = "Light(s)"<br>
 Example of a button wire as shown below: the connector's polarising tab faces upward; the left two pins connect to the microswitch, the right two pins connect to the LED. Encoder connections are similar, follow the above diagram.<br>![](https://github.com/LGGZi/Arduino-diy-iidx-controller/blob/main/IMAGE/WIREING.png)<br>
 The USB section is brought out as a 4‑pin header, allowing an external USB module to be connected.<br>![](https://github.com/LGGZi/Arduino-diy-iidx-controller/blob/main/IMAGE/USB%20part.jpg)<br>
 Gerber files for the USB module are in `PCB&BOM`.
