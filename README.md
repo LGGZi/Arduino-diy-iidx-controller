@@ -22,7 +22,7 @@
 
 ------------------------------------------------------------------------------------<br>
 通过使用EEPROM实现了模式的记忆，插入时不选择模式（不按下按键）会从EEPROM中读取上次的模式并进入
-
+可利用组合键开关灯光，开关灯光的函数为lightswitch()，默认为(11,0,3,button_buf),即1、4、12按钮同时按下切换开关。
 ## 电路板使用说明
 实物图<br>![](https://github.com/LGGZi/Arduino-diy-iidx-controller/blob/main/IMAGE/Full.jpg)<br>
 所有配件通过XH2.54的4pin借口连接，连接方式如下图<br>![](https://github.com/LGGZi/Arduino-diy-iidx-controller/blob/main/IMAGE/BT%20connection.png)<br>
